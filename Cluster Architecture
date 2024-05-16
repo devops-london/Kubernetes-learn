@@ -1,0 +1,70 @@
+
+Kubernetes Architecture:
+Kubernetes is an open-source platform for automating the deployment, scaling, and operations of application containers across clusters of hosts. It provides a container-centric management environment. Here's an overview of its architecture:
+
+Components of Kubernetes Architecture
+1. Master Node Components
+
+The master node is responsible for managing the Kubernetes cluster. It consists of several key components:
+
+API Server (kube-apiserver): The API server is the entry point for all REST commands used to control the cluster. It exposes the Kubernetes API.
+
+etcd: A consistent and highly-available key-value store used as Kubernetes' backing store for all cluster data.
+
+Controller Manager (kube-controller-manager): This component runs controller processes that handle routine tasks, such as:
+
+Node Controller: Monitors and responds to node failures.
+Replication Controller: Maintains the desired number of pod replicas.
+Endpoints Controller: Populates the Endpoints object.
+Service Account & Token Controllers: Create default accounts and access tokens for new namespaces.
+Scheduler (kube-scheduler): The scheduler assigns work to nodes. It watches for newly created pods that have no node assigned, and selects a node for them to run on based on resource availability.
+
+2. Node Components
+
+Each worker node in the cluster runs the necessary services to support the containers managed by Kubernetes:
+
+Kubelet: An agent that runs on each node in the cluster. It ensures that containers are running in a pod.
+
+Kube-proxy: A network proxy that runs on each node. It maintains network rules on nodes and enables network communication to your Pods from network sessions inside or outside of the cluster.
+
+Container Runtime: The software that is responsible for running containers. Kubernetes supports several runtimes: Docker, containerd, CRI-O, etc.
+
+Pod and Cluster-Level Resources
+Pods: The smallest and simplest Kubernetes object. A pod represents a set of running containers on your cluster.
+
+ReplicaSets: Ensures a specified number of pod replicas are running at any given time.
+
+Deployments: Provides declarative updates to applications, managing ReplicaSets and Pods.
+
+Services: An abstraction that defines a logical set of Pods and a policy to access them. Often used to expose an application running on a set of Pods.
+
+ConfigMaps and Secrets: Objects used to manage configuration and sensitive information, respectively.
+
+Namespaces: Provides a mechanism for isolating groups of resources within a single cluster.
+
+Communication and Coordination
+Service Discovery and Load Balancing: Kubernetes uses DNS for service discovery. Each service is assigned a DNS name, and Kubernetes maintains the mapping of service names to IP addresses.
+
+Network Policies: Specify how groups of pods are allowed to communicate with each other and with other network endpoints.
+
+Ingress: Manages external access to the services in a cluster, typically HTTP.
+
+Kubernetes Control Flow
+User Interaction: Users interact with the Kubernetes cluster through the API server using command-line tools like kubectl, client libraries, or directly via REST API calls.
+
+Configuration Storage: All configurations and states are stored in etcd.
+
+Controller Actions: Controllers watch the state of the cluster through the API server and make or request changes where needed to reach the desired state.
+
+Scheduler Actions: The scheduler assigns pods to nodes based on resource availability and policies.
+
+Node Actions: The Kubelet on each node ensures that the containers are running as specified by the API server.
+
+High Availability and Scalability
+Kubernetes supports high availability by running multiple instances of master components (API server, Controller Manager, and Scheduler). Etcd can be set up in a clustered configuration to provide data redundancy and fault tolerance. Nodes can be added or removed to scale the cluster.
+
+Summary
+Kubernetes architecture is designed for automation, efficiency, and scalability in managing containerized applications. Its modular components work together to maintain the desired state of applications, handle failures, and provide a seamless way to scale and update applications.
+
+
+https://kubernetes.io/images/docs/kubernetes-cluster-architecture.svg

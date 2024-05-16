@@ -1,0 +1,52 @@
+
+Here are the steps to see the details:
+
+1. List all Pods in the kube-system Namespace:
+This command lists all the Pods running in the kube-system namespace, where Kubernetes system components typically run.
+
+kubectl get pods -n kube-system
+2. View Detailed Information about a Specific Pod:
+You can get detailed information about a specific Pod, such as the API server, controller manager, or etcd, by using the kubectl describe pod command.
+
+For example, to get details about the API server Pod:
+
+kubectl describe pod <api-server-pod-name> -n kube-system
+To find the name of the API server Pod, you can look at the output from the first command. Similarly, you can get details for the controller manager and etcd Pods.
+
+3. Example Commands:
+API Server
+
+First, find the name of the API server Pod:
+
+kubectl get pods -n kube-system | grep kube-apiserver
+Then, describe the API server Pod:
+
+kubectl describe pod <api-server-pod-name> -n kube-system
+Controller Manager
+
+Find the name of the controller manager Pod:
+
+kubectl get pods -n kube-system | grep kube-controller-manager
+Then, describe the controller manager Pod:
+
+kubectl describe pod <controller-manager-pod-name> -n kube-system
+etcd
+
+Find the name of the etcd Pod:
+
+kubectl get pods -n kube-system | grep etcd
+Then, describe the etcd Pod:
+
+kubectl describe pod <etcd-pod-name> -n kube-system
+4. View Logs for Detailed Insights:
+To get more detailed operational information, you can view the logs of these components. For example, to view the logs of the API server:
+
+kubectl logs <api-server-pod-name> -n kube-system
+Similarly, you can view logs for the controller manager and etcd Pods:
+
+kubectl logs <controller-manager-pod-name> -n kube-system
+kubectl logs <etcd-pod-name> -n kube-system
+5. Check Cluster Component Status:
+To get an overview of the status of the cluster components, you can use:
+
+kubectl get componentstatuses
